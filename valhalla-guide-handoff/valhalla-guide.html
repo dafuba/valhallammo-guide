@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ValhallaMMO — Server Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#13110e;
+  --bg2:#1b1813;
+  --panel:#201c16;
+  --panel2:#272219;
+  --line:#3a3326;
+  --line2:#4a4232;
+  --gold:#c9a227;
+  --gold-dim:#9a7c1e;
+  --ink:#e8e0cf;
+  --ink-dim:#a99f88;
+  --ink-faint:#7a7160;
+  --green:#7fae4b;
+  --blue:#5b9bd5;
+  --red:#cc5a4a;
+  --purple:#9d7cc4;
+  --teal:#4fb09a;
+  --orange:#d98b3a;
+  --radius:10px;
+  --serif:'Spectral',Georgia,serif;
+  --display:'Cinzel',serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:16px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(circle at 50% 0%, #1f1b14 0%, var(--bg) 60%);
+  min-height:100vh;
+}
+::selection{background:var(--gold);color:#1a1710}
+a{color:var(--gold);text-decoration:none}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+
+/* ===== Header ===== */
+header{
+  border-bottom:1px solid var(--line);
+  background:rgba(19,17,14,0.85);
+  backdrop-filter:blur(12px);
+  position:sticky;top:0;z-index:100;
+}
+.head-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:14px}
+.crest{
+  width:40px;height:40px;border:1.5px solid var(--gold);border-radius:8px;
+  display:grid;place-items:center;color:var(--gold);font-size:22px;
+  background:linear-gradient(160deg,#241f17,#1a1610);
+}
+.brand h1{font-family:var(--display);font-size:19px;font-weight:600;letter-spacing:0.04em;color:var(--ink)}
+.brand .sub{font-size:11px;color:var(--ink-faint);letter-spacing:0.18em;text-transform:uppercase;font-family:var(--mono)}
+.nav{display:flex;gap:4px}
+.nav button{
+  background:none;border:none;color:var(--ink-dim);font-family:var(--serif);
+  font-size:14px;padding:8px 14px;border-radius:7px;cursor:pointer;transition:.18s;letter-spacing:0.01em;
+}
+.nav button:hover{color:var(--ink);background:var(--panel)}
+.nav button.active{color:var(--gold);background:var(--panel);box-shadow:inset 0 -2px 0 var(--gold)}
+.menu-btn{display:none;background:none;border:1px solid var(--line2);color:var(--ink);width:40px;height:40px;border-radius:8px;font-size:20px;cursor:pointer}
+
+/* ===== Page sections ===== */
+.page{display:none;padding:48px 0 80px;animation:fade .4s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px}
+.page h2{font-family:var(--display);font-size:34px;font-weight:600;letter-spacing:0.02em;margin-bottom:8px;color:var(--ink)}
+.page .lede{font-size:18px;color:var(--ink-dim);max-width:680px;margin-bottom:36px;font-weight:400}
+h3{font-family:var(--display);font-size:21px;font-weight:600;margin:40px 0 16px;color:var(--ink);letter-spacing:0.02em}
+h4{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:0.05em;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+p{margin-bottom:14px;color:var(--ink-dim)}
+p strong,li strong{color:var(--ink);font-weight:600}
+
+/* ===== Cards ===== */
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{
+  background:linear-gradient(160deg,var(--panel),var(--bg2));
+  border:1px solid var(--line);border-radius:var(--radius);padding:22px;transition:.2s;
+}
+.card:hover{border-color:var(--line2);transform:translateY(-2px)}
+.card .ico{font-size:26px;margin-bottom:12px;display:block}
+.card h4{margin-bottom:8px}
+.card .title{font-family:var(--display);font-size:17px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.card p{font-size:14.5px;margin-bottom:0;color:var(--ink-dim)}
+
+/* hero */
+.hero{
+  border:1px solid var(--line);border-radius:14px;padding:40px;margin-bottom:40px;
+  background:linear-gradient(135deg,#241f16 0%,#1a1610 60%);position:relative;overflow:hidden;
+}
+.hero::after{content:"⚔";position:absolute;right:-10px;bottom:-30px;font-size:180px;opacity:0.05;color:var(--gold)}
+.hero h2{font-size:40px;margin-bottom:14px}
+.hero p{font-size:17px;max-width:640px}
+.stats-row{display:flex;gap:30px;margin-top:28px;flex-wrap:wrap;position:relative;z-index:1}
+.stat-b{border-left:2px solid var(--gold);padding-left:14px}
+.stat-b .n{font-family:var(--display);font-size:28px;font-weight:700;color:var(--gold);line-height:1}
+.stat-b .l{font-size:12px;color:var(--ink-faint);letter-spacing:0.1em;text-transform:uppercase;font-family:var(--mono);margin-top:4px}
+
+/* skill chips */
+.skill-tag{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;padding:4px 11px;border-radius:20px;font-family:var(--mono);letter-spacing:0.03em;border:1px solid var(--line2);color:var(--ink-dim);background:var(--panel)}
+
+/* ===== Skill cards ===== */
+.skill-card{
+  background:linear-gradient(160deg,var(--panel),var(--bg2));
+  border:1px solid var(--line);border-radius:var(--radius);padding:0;overflow:hidden;cursor:pointer;transition:.2s;
+}
+.skill-card:hover{border-color:var(--gold-dim);transform:translateY(-3px)}
+.skill-card .sc-head{display:flex;align-items:center;gap:14px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.sc-icon{width:46px;height:46px;border-radius:9px;display:grid;place-items:center;font-size:24px;flex-shrink:0;border:1px solid var(--line2)}
+.sc-name{font-family:var(--display);font-size:17px;font-weight:600;color:var(--ink)}
+.sc-cat{font-size:11px;font-family:var(--mono);letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint)}
+.skill-card .sc-body{padding:16px 20px}
+.skill-card .sc-body p{font-size:14px;margin:0;color:var(--ink-dim);line-height:1.6}
+.sc-more{padding:0 20px 16px;font-size:12.5px;font-family:var(--mono);color:var(--gold-dim);letter-spacing:0.05em}
+
+/* ===== Tables ===== */
+.tbl-wrap{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin:18px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;padding:12px 16px;background:var(--panel2);font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:500;border-bottom:1px solid var(--line)}
+td{padding:11px 16px;border-bottom:1px solid var(--line);color:var(--ink-dim)}
+tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:var(--panel);cursor:pointer}
+td.xp{font-family:var(--mono);color:var(--gold);font-size:13px}
+td.lvl{font-family:var(--display);color:var(--ink);font-weight:600}
+
+/* ===== Step flow ===== */
+.flow{display:flex;flex-direction:column;gap:0;margin:24px 0;counter-reset:step}
+.step{display:flex;gap:18px;position:relative;padding-bottom:28px}
+.step:not(:last-child)::before{content:"";position:absolute;left:19px;top:42px;bottom:-2px;width:2px;background:var(--line2)}
+.step-num{
+  width:40px;height:40px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;
+  font-family:var(--display);font-weight:700;font-size:16px;color:var(--bg);background:var(--gold);position:relative;z-index:1;
+}
+.step-body{flex:1;padding-top:4px}
+.step-body .st{font-family:var(--display);font-size:17px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.step-body p{font-size:14.5px;margin:0}
+.step-body .tag{display:inline-block;font-size:11px;font-family:var(--mono);padding:2px 9px;border-radius:5px;background:var(--panel2);border:1px solid var(--line2);color:var(--gold-dim);margin-top:8px;letter-spacing:0.05em}
+
+/* ===== Calculator ===== */
+.calc{background:linear-gradient(160deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:14px;padding:28px;margin:24px 0}
+.calc label{display:block;font-family:var(--mono);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px}
+.calc input[type=range]{width:100%;accent-color:var(--gold);height:6px;margin-bottom:6px}
+.calc-out{display:flex;align-items:baseline;gap:12px;margin-top:18px}
+.calc-out .big{font-family:var(--display);font-size:38px;font-weight:700;color:var(--gold);line-height:1}
+.calc-out .unit{font-size:14px;color:var(--ink-dim)}
+.calc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.calc-mini{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:14px}
+.calc-mini .n{font-family:var(--mono);font-size:18px;color:var(--ink);font-weight:500}
+.calc-mini .l{font-size:11px;color:var(--ink-faint);font-family:var(--mono);letter-spacing:0.05em;margin-top:3px}
+
+/* search */
+.search-bar{position:relative;margin-bottom:22px}
+.search-bar input{
+  width:100%;padding:13px 16px 13px 44px;font-family:var(--serif);font-size:15px;
+  background:var(--panel);border:1px solid var(--line2);border-radius:9px;color:var(--ink);
+}
+.search-bar input:focus{outline:none;border-color:var(--gold-dim)}
+.search-bar .si{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--ink-faint);font-size:17px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.chip{font-family:var(--mono);font-size:12px;letter-spacing:0.04em;padding:6px 13px;border-radius:20px;border:1px solid var(--line2);background:var(--panel);color:var(--ink-dim);cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--gold-dim);color:var(--ink)}
+.chip.active{background:var(--gold);color:var(--bg);border-color:var(--gold);font-weight:500}
+
+.badge{display:inline-block;font-size:11px;font-family:var(--mono);padding:3px 9px;border-radius:5px;letter-spacing:0.04em;font-weight:500}
+.b-grid{background:rgba(91,155,213,.15);color:var(--blue);border:1px solid rgba(91,155,213,.3)}
+.b-cauldron{background:rgba(79,176,154,.15);color:var(--teal);border:1px solid rgba(79,176,154,.3)}
+.b-immersive{background:rgba(217,139,58,.15);color:var(--orange);border:1px solid rgba(217,139,58,.3)}
+.b-smith{background:rgba(157,124,196,.15);color:var(--purple);border:1px solid rgba(157,124,196,.3)}
+
+.callout{border-left:3px solid var(--gold);background:var(--panel);padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0}
+.callout p{margin:0;font-size:14.5px}
+.callout.warn{border-color:var(--red)}
+.callout .ct{font-family:var(--display);font-weight:600;color:var(--ink);font-size:14px;margin-bottom:4px;letter-spacing:0.03em}
+
+footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;color:var(--ink-faint);font-size:13px;font-family:var(--mono)}
+
+@media(max-width:860px){
+  .nav{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;background:var(--bg2);border-bottom:1px solid var(--line);padding:8px}
+  .nav.open{display:flex}
+  .menu-btn{display:grid;place-items:center}
+  .g4,.g3{grid-template-columns:repeat(2,1fr)}
+  .g2{grid-template-columns:1fr}
+  .calc-grid{grid-template-columns:1fr}
+  .page h2{font-size:27px}.hero h2{font-size:28px}
+}
+@media(max-width:520px){.g4,.g3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap head-inner">
+    <div class="brand">
+      <div class="crest">⚔</div>
+      <div>
+        <h1>ValhallaMMO</h1>
+        <div class="sub">Server Codex · Classic</div>
+      </div>
+    </div>
+    <nav class="nav" id="nav">
+      <button class="active" data-page="home">Overview</button>
+      <button data-page="skills">Skills</button>
+      <button data-page="leveling">Leveling</button>
+      <button data-page="smithing">Smithing</button>
+      <button data-page="tinker">Upgrades</button>
+      <button data-page="recipes">Recipes</button>
+    </nav>
+    <button class="menu-btn" id="menuBtn">☰</button>
+  </div>
+</header>
+
+<main class="wrap" id="main"></main>
+
+<footer>
+  <div class="wrap">Built from ValhallaMMO 1.9.3 · Classic import pack · 555 recipes · 14 skills</div>
+</footer>
+<script id="appdata" type="application/json">__DATA__</script>
+<script>__SCRIPT__</script>
+</body>
+</html>
