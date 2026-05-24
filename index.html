@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ValhallaMMO — Server Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#13110e;
+  --bg2:#1b1813;
+  --panel:#201c16;
+  --panel2:#272219;
+  --line:#3a3326;
+  --line2:#4a4232;
+  --gold:#c9a227;
+  --gold-dim:#9a7c1e;
+  --ink:#e8e0cf;
+  --ink-dim:#a99f88;
+  --ink-faint:#7a7160;
+  --green:#7fae4b;
+  --blue:#5b9bd5;
+  --red:#cc5a4a;
+  --purple:#9d7cc4;
+  --teal:#4fb09a;
+  --orange:#d98b3a;
+  --radius:10px;
+  --serif:'Spectral',Georgia,serif;
+  --display:'Cinzel',serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:16px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(circle at 50% 0%, #1f1b14 0%, var(--bg) 60%);
+  min-height:100vh;
+}
+::selection{background:var(--gold);color:#1a1710}
+a{color:var(--gold);text-decoration:none}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+
+/* ===== Header ===== */
+header{
+  border-bottom:1px solid var(--line);
+  background:rgba(19,17,14,0.85);
+  backdrop-filter:blur(12px);
+  position:sticky;top:0;z-index:100;
+}
+.head-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:14px}
+.crest{
+  width:40px;height:40px;border:1.5px solid var(--gold);border-radius:8px;
+  display:grid;place-items:center;color:var(--gold);font-size:22px;
+  background:linear-gradient(160deg,#241f17,#1a1610);
+}
+.brand h1{font-family:var(--display);font-size:19px;font-weight:600;letter-spacing:0.04em;color:var(--ink)}
+.brand .sub{font-size:11px;color:var(--ink-faint);letter-spacing:0.18em;text-transform:uppercase;font-family:var(--mono)}
+.nav{display:flex;gap:4px}
+.nav button{
+  background:none;border:none;color:var(--ink-dim);font-family:var(--serif);
+  font-size:14px;padding:8px 14px;border-radius:7px;cursor:pointer;transition:.18s;letter-spacing:0.01em;
+}
+.nav button:hover{color:var(--ink);background:var(--panel)}
+.nav button.active{color:var(--gold);background:var(--panel);box-shadow:inset 0 -2px 0 var(--gold)}
+.menu-btn{display:none;background:none;border:1px solid var(--line2);color:var(--ink);width:40px;height:40px;border-radius:8px;font-size:20px;cursor:pointer}
+
+/* ===== Page sections ===== */
+.page{display:none;padding:48px 0 80px;animation:fade .4s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px}
+.page h2{font-family:var(--display);font-size:34px;font-weight:600;letter-spacing:0.02em;margin-bottom:8px;color:var(--ink)}
+.page .lede{font-size:18px;color:var(--ink-dim);max-width:680px;margin-bottom:36px;font-weight:400}
+h3{font-family:var(--display);font-size:21px;font-weight:600;margin:40px 0 16px;color:var(--ink);letter-spacing:0.02em}
+h4{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:0.05em;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+p{margin-bottom:14px;color:var(--ink-dim)}
+p strong,li strong{color:var(--ink);font-weight:600}
+
+/* ===== Cards ===== */
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{
+  background:linear-gradient(160deg,var(--panel),var(--bg2));
+  border:1px solid var(--line);border-radius:var(--radius);padding:22px;transition:.2s;
+}
+.card:hover{border-color:var(--line2);transform:translateY(-2px)}
+.card .ico{font-size:26px;margin-bottom:12px;display:block}
+.card h4{margin-bottom:8px}
+.card .title{font-family:var(--display);font-size:17px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.card p{font-size:14.5px;margin-bottom:0;color:var(--ink-dim)}
+
+/* hero */
+.hero{
+  border:1px solid var(--line);border-radius:14px;padding:40px;margin-bottom:40px;
+  background:linear-gradient(135deg,#241f16 0%,#1a1610 60%);position:relative;overflow:hidden;
+}
+.hero::after{content:"⚔";position:absolute;right:-10px;bottom:-30px;font-size:180px;opacity:0.05;color:var(--gold)}
+.hero h2{font-size:40px;margin-bottom:14px}
+.hero p{font-size:17px;max-width:640px}
+.stats-row{display:flex;gap:30px;margin-top:28px;flex-wrap:wrap;position:relative;z-index:1}
+.stat-b{border-left:2px solid var(--gold);padding-left:14px}
+.stat-b .n{font-family:var(--display);font-size:28px;font-weight:700;color:var(--gold);line-height:1}
+.stat-b .l{font-size:12px;color:var(--ink-faint);letter-spacing:0.1em;text-transform:uppercase;font-family:var(--mono);margin-top:4px}
+
+/* skill chips */
+.skill-tag{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;padding:4px 11px;border-radius:20px;font-family:var(--mono);letter-spacing:0.03em;border:1px solid var(--line2);color:var(--ink-dim);background:var(--panel)}
+
+/* ===== Skill cards ===== */
+.skill-card{
+  background:linear-gradient(160deg,var(--panel),var(--bg2));
+  border:1px solid var(--line);border-radius:var(--radius);padding:0;overflow:hidden;cursor:pointer;transition:.2s;
+}
+.skill-card:hover{border-color:var(--gold-dim);transform:translateY(-3px)}
+.skill-card .sc-head{display:flex;align-items:center;gap:14px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.sc-icon{width:46px;height:46px;border-radius:9px;display:grid;place-items:center;font-size:24px;flex-shrink:0;border:1px solid var(--line2)}
+.sc-name{font-family:var(--display);font-size:17px;font-weight:600;color:var(--ink)}
+.sc-cat{font-size:11px;font-family:var(--mono);letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint)}
+.skill-card .sc-body{padding:16px 20px}
+.skill-card .sc-body p{font-size:14px;margin:0;color:var(--ink-dim);line-height:1.6}
+.sc-more{padding:0 20px 16px;font-size:12.5px;font-family:var(--mono);color:var(--gold-dim);letter-spacing:0.05em}
+
+/* ===== Tables ===== */
+.tbl-wrap{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin:18px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;padding:12px 16px;background:var(--panel2);font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:500;border-bottom:1px solid var(--line)}
+td{padding:11px 16px;border-bottom:1px solid var(--line);color:var(--ink-dim)}
+tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:var(--panel)}
+td.xp{font-family:var(--mono);color:var(--gold);font-size:13px}
+td.lvl{font-family:var(--display);color:var(--ink);font-weight:600}
+
+/* ===== Step flow ===== */
+.flow{display:flex;flex-direction:column;gap:0;margin:24px 0;counter-reset:step}
+.step{display:flex;gap:18px;position:relative;padding-bottom:28px}
+.step:not(:last-child)::before{content:"";position:absolute;left:19px;top:42px;bottom:-2px;width:2px;background:var(--line2)}
+.step-num{
+  width:40px;height:40px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;
+  font-family:var(--display);font-weight:700;font-size:16px;color:var(--bg);background:var(--gold);position:relative;z-index:1;
+}
+.step-body{flex:1;padding-top:4px}
+.step-body .st{font-family:var(--display);font-size:17px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.step-body p{font-size:14.5px;margin:0}
+.step-body .tag{display:inline-block;font-size:11px;font-family:var(--mono);padding:2px 9px;border-radius:5px;background:var(--panel2);border:1px solid var(--line2);color:var(--gold-dim);margin-top:8px;letter-spacing:0.05em}
+
+/* ===== Calculator ===== */
+.calc{background:linear-gradient(160deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:14px;padding:28px;margin:24px 0}
+.calc label{display:block;font-family:var(--mono);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px}
+.calc input[type=range]{width:100%;accent-color:var(--gold);height:6px;margin-bottom:6px}
+.calc-out{display:flex;align-items:baseline;gap:12px;margin-top:18px}
+.calc-out .big{font-family:var(--display);font-size:38px;font-weight:700;color:var(--gold);line-height:1}
+.calc-out .unit{font-size:14px;color:var(--ink-dim)}
+.calc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.calc-mini{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:14px}
+.calc-mini .n{font-family:var(--mono);font-size:18px;color:var(--ink);font-weight:500}
+.calc-mini .l{font-size:11px;color:var(--ink-faint);font-family:var(--mono);letter-spacing:0.05em;margin-top:3px}
+
+/* search */
+.search-bar{position:relative;margin-bottom:22px}
+.search-bar input{
+  width:100%;padding:13px 16px 13px 44px;font-family:var(--serif);font-size:15px;
+  background:var(--panel);border:1px solid var(--line2);border-radius:9px;color:var(--ink);
+}
+.search-bar input:focus{outline:none;border-color:var(--gold-dim)}
+.search-bar .si{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--ink-faint);font-size:17px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.chip{font-family:var(--mono);font-size:12px;letter-spacing:0.04em;padding:6px 13px;border-radius:20px;border:1px solid var(--line2);background:var(--panel);color:var(--ink-dim);cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--gold-dim);color:var(--ink)}
+.chip.active{background:var(--gold);color:var(--bg);border-color:var(--gold);font-weight:500}
+
+.badge{display:inline-block;font-size:11px;font-family:var(--mono);padding:3px 9px;border-radius:5px;letter-spacing:0.04em;font-weight:500}
+.b-grid{background:rgba(91,155,213,.15);color:var(--blue);border:1px solid rgba(91,155,213,.3)}
+.b-cauldron{background:rgba(79,176,154,.15);color:var(--teal);border:1px solid rgba(79,176,154,.3)}
+.b-immersive{background:rgba(217,139,58,.15);color:var(--orange);border:1px solid rgba(217,139,58,.3)}
+.b-smith{background:rgba(157,124,196,.15);color:var(--purple);border:1px solid rgba(157,124,196,.3)}
+
+.callout{border-left:3px solid var(--gold);background:var(--panel);padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0}
+.callout p{margin:0;font-size:14.5px}
+.callout.warn{border-color:var(--red)}
+.callout .ct{font-family:var(--display);font-weight:600;color:var(--ink);font-size:14px;margin-bottom:4px;letter-spacing:0.03em}
+
+footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;color:var(--ink-faint);font-size:13px;font-family:var(--mono)}
+
+@media(max-width:860px){
+  .nav{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;background:var(--bg2);border-bottom:1px solid var(--line);padding:8px}
+  .nav.open{display:flex}
+  .menu-btn{display:grid;place-items:center}
+  .g4,.g3{grid-template-columns:repeat(2,1fr)}
+  .g2{grid-template-columns:1fr}
+  .calc-grid{grid-template-columns:1fr}
+  .page h2{font-size:27px}.hero h2{font-size:28px}
+}
+@media(max-width:520px){.g4,.g3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap head-inner">
+    <div class="brand">
+      <div class="crest">⚔</div>
+      <div>
+        <h1>ValhallaMMO</h1>
+        <div class="sub">Server Codex · Classic</div>
+      </div>
+    </div>
+    <nav class="nav" id="nav">
+      <button class="active" data-page="home">Overview</button>
+      <button data-page="skills">Skills</button>
+      <button data-page="leveling">Leveling</button>
+      <button data-page="smithing">Smithing</button>
+      <button data-page="tinker">Upgrades</button>
+      <button data-page="recipes">Recipes</button>
+    </nav>
+    <button class="menu-btn" id="menuBtn">☰</button>
+  </div>
+</header>
+
+<main class="wrap" id="main"></main>
+
+<footer>
+  <div class="wrap">Built from ValhallaMMO 1.9.3 · Classic import pack · 555 recipes · 14 skills</div>
+</footer>
+<script id="appdata" type="application/json">{"skills":[{"id":"mining","name":"Mining","cat":"Gathering","icon":"\u26cf","color":"#cc5a4a","desc":"Increase your ore extraction, improve blast mining, and gain rare minerals useful in crafting.","how":"Earn XP by breaking ores and stone with a pickaxe. Naturally-generated blocks only \u2014 placed blocks give nothing.","ability":"Vein Mining & Drilling \u2014 break connected ore veins and tunnel faster.","top":[["Ancient Debris",1600],["Netherite Scrap",800],["Deepslate Diamond Ore",600],["Diamond Ore",400],["Emerald Ore",400],["Lapis Ore",320],["Gold Ore",160],["Iron Ore",80],["Coal Ore",40],["Stone / Cobble",8]]},{"id":"farming","name":"Farming","cat":"Gathering","icon":"\ud83c\udf3e","color":"#7fae4b","desc":"Increase the bounty of your harvest and animals, safely harvest honey, and collect rare plants and ingredients.","how":"Earn XP by harvesting crops, breeding animals, shearing, and collecting from bees & berry bushes.","ability":"Replanting & multi-harvest perks reduce manual work and boost yields.","top":[["Shear Mooshroom",1000],["Beehive / Bee Nest",400],["Honey Bottle",400],["Breed Hoglin",200],["Shear Sheep",200],["Spore Blossom",120],["Torchflower",100],["Rabbit",100],["Melon / Pumpkin",80],["Wheat & basic crops","~20-40"]]},{"id":"woodcutting","name":"Woodcutting","cat":"Gathering","icon":"\ud83e\ude93","color":"#d98b3a","desc":"Increase wood harvesting, augment your building skills, and gain more building material from less resources.","how":"Earn XP by chopping logs and stripping wood with an axe.","ability":"Tree Capitator \u2014 fell an entire tree in one swing at higher levels.","top":[["Warped / Crimson Hyphae",80],["Oak / Spruce / Birch Wood",60],["Stripped Hyphae",40],["Logs (all types)",40],["Stripped Wood",30],["Stripped Logs",20]]},{"id":"digging","name":"Digging","cat":"Gathering","icon":"\ud83e\udd44","color":"#caa15a","desc":"Increase your bounty from the earth, find more treasure in archaeology, and sift small items from sand and gravel.","how":"Earn XP by digging dirt, sand & gravel with a shovel, and by brushing suspicious blocks (archaeology).","ability":"Sifting \u2014 chance to find buried items in dug material.","top":[["Echo Shard (dug up)",2000],["Enchanted Book (dug up)",1000],["Netherite Scrap (dug up)",1000],["Diamond (dug up)",500],["Ender Pearl",200],["Brush Diamond (archaeology)",150],["Raw Iron/Gold/Copper",100],["Brush Emerald (archaeology)",100],["Coal",40],["Dirt / Sand / Gravel",8]]},{"id":"fishing","name":"Fishing","cat":"Gathering","icon":"\ud83c\udfa3","color":"#5b9bd5","desc":"Get more fish, find sunken treasure, and use bait to pull rare items more frequently.","how":"Earn XP per catch. Treasure and rare catches give far more than common fish.","ability":"Bait system \u2014 consumable bait raises rare-catch odds.","top":[["Tropical Fish",800],["Bow / Ench. Book / Rod",600],["Pufferfish",500],["Nautilus Shell",500],["Saddle / Name Tag",500],["Salmon",250],["Cod",200],["Lily Pad",150]]},{"id":"archery","name":"Archery","cat":"Combat","icon":"\ud83c\udff9","color":"#7fae4b","desc":"Increase ranged damage, improve accuracy, and kill targets at a safe distance. Slow to train but arguably the strongest skill.","how":"Earn XP by hitting and killing mobs with bows and crossbows.","ability":"Special arrows, multishot perks, and reduced ammo consumption.","top":[["XP scales with damage dealt to mobs at range \u2014 there is no fixed per-block table; higher-HP mobs and clean hits give the most."]]},{"id":"light_weapons","name":"Light Weapons","cat":"Combat","icon":"\ud83d\udde1","color":"#5b9bd5","desc":"Attack much faster and, with practice, deflect attacks \u2014 but weak against heavy plate armor.","how":"Earn XP by dealing damage with swords, daggers and rapiers.","ability":"Parry / deflect, bleed and crit perks for fast weapons.","top":[["XP scales with damage dealt in melee with light weapon types."]]},{"id":"heavy_weapons","name":"Heavy Weapons","cat":"Combat","icon":"\ud83e\ude93","color":"#cc5a4a","desc":"Hit much harder and are more effective against armor, but poor at blocking incoming attacks.","how":"Earn XP by dealing damage with axes, greataxes, maces, warhammers and spears.","ability":"Stun, armor-shred and heavy-strike perks.","top":[["XP scales with damage dealt in melee with heavy weapon types."]]},{"id":"light_armor","name":"Light Armor","cat":"Defense","icon":"\ud83e\udd4b","color":"#4fb09a","desc":"Improve evasion and stay protected without sacrificing much mobility.","how":"Earn XP by taking hits while wearing leather, chainmail or gold armor.","ability":"Dodge chance and movement-retention perks.","top":[["XP scales with damage absorbed while wearing light armor."]]},{"id":"heavy_armor","name":"Heavy Armor","cat":"Defense","icon":"\ud83d\udee1","color":"#9d7cc4","desc":"Greatly reduce damage taken and become an undefeatable menace, at the cost of some mobility.","how":"Earn XP by taking hits while wearing iron, diamond or netherite armor.","ability":"Flat damage reduction and knockback-resist perks.","top":[["XP scales with damage absorbed while wearing heavy armor."]]},{"id":"smithing","name":"Smithing","cat":"Crafting","icon":"\ud83d\udd28","color":"#d98b3a","desc":"Make tools and equipment of increasingly superior quality. The core skill of the Classic pack.","how":"Earn XP by crafting, quenching, fitting and sharpening gear at the table, cauldron and grindstone.","ability":"Quality scaling \u2014 higher Smithing level produces stronger gear from the same recipe.","top":[["Craft Elytra",20000],["Craft Diamond Chestplate",9600],["Craft Diamond Leggings",8400],["Craft Diamond Helmet",6000],["Craft Diamond Greataxe",4800],["Craft Diamond Sword",2400],["Quench (varies by tier)","300\u20132,400"],["Craft Wooden Dagger",50]]},{"id":"enchanting","name":"Enchanting","cat":"Crafting","icon":"\ud83d\udcd6","color":"#9d7cc4","desc":"Enhance your ability to imbue items with magic on the table and anvil. Achieve enchant levels previously impossible.","how":"Earn XP by enchanting items \u2014 higher-tier enchants give much more (Silk Touch/Infinity = 1000 base).","ability":"Higher max enchant levels and better anvil combining.","top":[["Silk Touch / Infinity / Channeling",1000],["Mending / Multishot / Flame",750],["Thorns / Soul Speed",600],["Punch / Fire Aspect",550],["Fortune / Looting / Sweeping",450],["Protection",200],["Sharpness / Efficiency",180]]},{"id":"alchemy","name":"Alchemy","cat":"Crafting","icon":"\u2697","color":"#4fb09a","desc":"Make potions and poisons of extreme potency, and learn to transmute materials.","how":"Earn XP by brewing potions and performing transmutations.","ability":"Stronger custom potions, poisons, and material transmutation recipes.","top":[["XP scales with potions brewed and transmutations performed."]]},{"id":"power","name":"Power","cat":"Meta","icon":"\u2726","color":"#c9a227","desc":"Your overall level. Leveling any other skill feeds Power. Spend Power skill points on any perk you've unlocked.","how":"Power XP is gained automatically as you earn XP in every other skill. Max level 256.","ability":"Grants skill points \u2014 the currency you spend in skill trees to unlock perks.","top":[["Power 256 (max)","796,928 total"],["Power 200","521,800"],["Power 100","170,900"],["Power 50","62,950"],["Power 10","8,990"]]}],"curve":{"formula":"(level + 75 \u00d7 2^(level / 7.6)) + 300","max":100,"milestones":[[1,383,383],[5,2012,423],[10,4336,497],[20,10682,785],[30,21878,1487],[40,45002,3220],[50,97670,7520],[60,223735,18209],[70,532364,44803],[80,1295317,110991],[90,3189109,275743],[100,7897845,685860]]},"smithSteps":[{"t":"Craft","d":"Use the crafting table with the vanilla recipe shape. ValhallaMMO intercepts it and applies quality scaling based on your Smithing level, boosting attributes and durability. Awards Smithing XP. The item receives internal tag 1 ('needs heating').","tag":"Crafting table"},{"t":"Heat the item (metals only)","d":"Put the crafted weapon or armor piece itself into a furnace, blast furnace, or campfire. This does NOT consume or change the item \u2014 it just adds an internal 'heated' tag (tag 5). You cannot heat an item twice. The item must have been Valhalla-crafted (tag 1). Note: smelting a raw ingot gives you a 'hot ingot' custom item, which is separate \u2014 do NOT drop that in the cauldron.","tag":"Furnace \u00b7 blast furnace \u00b7 campfire"},{"t":"Quench","d":"Drop the heated weapon or armor into a water cauldron. After ~30 seconds it quenches \u2014 permanently boosting durability (up to 2\u00d7) and adding dig speed to tools. The 'heated' and 'needs heating' tags are removed. Awards 300\u20132,400 Smithing XP depending on tier. Important: you drop the weapon/armor itself, not a hot ingot.","tag":"Water cauldron \u00b7 30s"},{"t":"Fit (armor only)","d":"Return crafted armor to the table with its fit recipe. Scales protection to your current Smithing level and removes the 'unfitted' tag. Armor isn't at full strength until fitted.","tag":"Crafting table"},{"t":"Sharpen (edged gear)","d":"Right-click a grindstone while holding your Valhalla-crafted weapon or tool. No extra ingredients needed \u2014 just the item and the grindstone. Scales attack damage further by Smithing level. Requires the item to have tag 2 ('needs sharpening'), which is set during crafting. Works once per item.","tag":"Grindstone \u00b7 no ingredients"},{"t":"Tinker upgrades","d":"Apply stat upgrades at the table (see Upgrades page). Each upgrade uses a recipe and most cap at 4 stacks. Bonus-slot upgrades raise that cap.","tag":"Crafting table"},{"t":"Netherite upgrade","d":"For diamond gear: combine with an 'unstable diamond' at the smithing table to reach netherite tier. Keeps all tags and upgrades. Covers all 16 diamond types plus knuckles & elytra.","tag":"Smithing table"}],"tinker":{"Offensive":[["Attack damage","Flat bonus to all damage dealt"],["Armor penetration","Ignores a fraction of enemy armor"],["Crit chance","Chance to land a critical hit"],["Bleed chance","Chance to apply a bleeding damage-over-time"],["Stun chance","Chance to stun the target on hit"],["Life steal","Heals you for part of damage dealt"],["Shield disarming","Chance to knock a blocking shield away"],["Dismount chance","Chance to knock riders off mounts"],["Attack reach","Extends melee range (max 3)"],["All-damage bonus","Flat bonus applied to every damage type at once"]],"Elemental damage":[["Fire damage","Adds fire damage type"],["Magic damage","Adds magic damage type"],["Poison damage","Adds poison damage type"],["Necrotic damage","Adds necrotic damage type"],["Radiant damage","Adds radiant (holy) damage type"]],"Defensive":[["Bleed resistance","Reduces incoming bleed"],["Crit damage resistance","Reduces extra crit damage taken"],["Stun resistance","Reduces stun effect on you"],["Dodge chance","Chance to evade a hit entirely"],["Knockback resistance","Reduces knockback taken"],["Immunity bonus","Flat reduction to all damage"],["Immunity reduction","Shortens enemy damage-immunity window"],["Healing bonus","Boosts all healing received"]],"Mobility":[["Jump height","Higher jumps"],["Extra jumps","Adds double/multi-jump (max 2)"],["Sprint speed","Faster while sprinting"],["Sneak speed","Faster while sneaking"]],"Gathering & utility":[["Mining speed","Faster block breaking"],["Mining drops","More drops from mined blocks"],["Mining luck","Better rare-drop odds"],["Digging drops / luck","More & rarer digging drops"],["Farming drops / luck","More & rarer crop drops"],["Woodcutting drops / luck","More & rarer wood drops"],["Entity drops","More mob loot"],["Deepslate affinity","Mines deepslate faster (max 1)"],["Durability multiplier","Item lasts longer"],["Ammo consumption","Uses fewer arrows/bolts"],["Cooldown reduction","Shorter ability cooldowns"]],"Progression":[["Skill XP gain","More ValhallaMMO skill XP (small damage-taken cost)"],["Vanilla XP gain","More vanilla XP (small damage-taken cost)"],["Smithing quality","Better smithing on this item"],["Enchanting quality","Better enchant outcomes"],["Alchemy quality","Better alchemy effects"],["Bonus slot 1 / 2 / 3","Adds extra upgrade slots (once each)"]]}}</script>
+<script>const DATA = JSON.parse(document.getElementById('appdata').textContent);
+const RECIPES = [["quench_copper_axe","cauldron",300],["quench_iron_hoe","cauldron",400],["quench_golden_hoe","cauldron",500],["quench_diamond_pickaxe","cauldron",1200],["quench_iron_spear","cauldron",400],["quench_golden_dagger","cauldron",500],["quench_copper_shovel","cauldron",300],["quench_copper_greataxe","cauldron",300],["quench_diamond_spear","cauldron",1200],["quench_diamond_helmet","cauldron",2400],["quench_copper_dagger","cauldron",300],["quench_golden_pickaxe","cauldron",500],["quench_iron_helmet","cauldron",400],["quench_diamond_axe","cauldron",1200],["quench_diamond_warhammer","cauldron",1200],["quench_golden_sword","cauldron",500],["quench_diamond_leggings","cauldron",2400],["quench_golden_rapier","cauldron",500],["quench_copper_sword","cauldron",300],["quench_iron_mace","cauldron",400],["quench_golden_chestplate","cauldron",500],["quench_iron_rapier","cauldron",400],["quench_iron_chestplate","cauldron",400],["quench_iron_warhammer","cauldron",400],["quench_copper_rapier","cauldron",300],["quench_iron_axe","cauldron",400],["quench_iron_pickaxe","cauldron",400],["quench_diamond_boots","cauldron",2400],["quench_golden_axe","cauldron",500],["quench_copper_pickaxe","cauldron",300],["quench_iron_sword","cauldron",400],["quench_golden_spear","cauldron",500],["quench_copper_chestplate","cauldron",300],["quench_chainmail_boots","cauldron",300],["quench_golden_boots","cauldron",500],["quench_copper_helmet","cauldron",300],["quench_iron_dagger","cauldron",400],["quench_diamond_rapier","cauldron",1200],["quench_diamond_hoe","cauldron",1200],["quench_copper_hoe","cauldron",300],["quench_diamond_greataxe","cauldron",1200],["quench_golden_greataxe","cauldron",500],["quench_golden_warhammer","cauldron",500],["quench_chainmail_leggings","cauldron",300],["quench_chainmail_chestplate","cauldron",300],["quench_iron_greataxe","cauldron",400],["quench_diamond_mace","cauldron",1200],["quench_golden_leggings","cauldron",500],["quench_golden_helmet","cauldron",500],["quench_copper_mace","cauldron",300],["quench_iron_boots","cauldron",400],["quench_diamond_dagger","cauldron",1200],["quench_copper_warhammer","cauldron",300],["quench_copper_leggings","cauldron",300],["quench_diamond_chestplate","cauldron",2400],["quench_iron_leggings","cauldron",400],["quench_chainmail_helmet","cauldron",300],["quench_copper_boots","cauldron",300],["quench_golden_mace","cauldron",500],["quench_diamond_sword","cauldron",1200],["quench_golden_shovel","cauldron",500],["quench_copper_spear","cauldron",300],["quench_diamond_shovel","cauldron",1200],["quench_iron_shovel","cauldron",400],["tinker_upgrade_immunity_reduction","grid",0],["tinker_upgrade_stun_chance","grid",0],["tinker_upgrade_entity_drops","grid",0],["tinker_upgrade_shield_disarming","grid",0],["tinker_upgrade_life_steal","grid",0],["tinker_upgrade_durability_multiplier","grid",0],["tinker_upgrade_mining_drops","grid",0],["tinker_upgrade_digging_luck","grid",0],["tinker_upgrade_digging_drops","grid",0],["tinker_upgrade_deepslate_affinity","grid",0],["tinker_upgrade_farming_drops","grid",0],["tinker_upgrade_mining_speed","grid",0],["tinker_upgrade_crit_damage_resistance","grid",0],["tinker_upgrade_bleed_resistance","grid",0],["tinker_upgrade_damage_necrotic","grid",0],["tinker_upgrade_damage_magic","grid",0],["tinker_upgrade_damage_fire","grid",0],["tinker_upgrade_damage_all","grid",0],["tinker_upgrade_damage_poison","grid",0],["tinker_upgrade_dodge_chance","grid",0],["tinker_upgrade_immunity_bonus_flat","grid",0],["tinker_upgrade_generic_knockback_resistance","grid",0],["tinker_upgrade_sneak_movement_speed_bonus","grid",0],["tinker_upgrade_vanilla_exp_gain","grid",0],["destabilize_diamond","grid",0],["tinker_upgrade_ammo_consumption","grid",0],["tinker_upgrade_jump_height","grid",0],["craft_trident","grid",500],["tinker_upgrade_jumps","grid",0],["craft_bow","grid",200],["tinker_upgrade_bonus_slot_2","grid",0],["tinker_upgrade_bonus_slot_3","grid",0],["tinker_upgrade_bonus_slot_1","grid",0],["tinker_upgrade_bleed_chance","grid",0],["tinker_upgrade_armor_penetration_fraction","grid",0],["tinker_upgrade_attack_damage","grid",0],["tinker_upgrade_attack_reach","grid",0],["craft_golden_leggings","grid",1750],["craft_stone_rapier","grid",200],["salvage_diamond_helmet","grid",0],["fit_chainmail_helmet","grid",100],["salvage_iron_leggings","grid",0],["salvage_diamond_hoe","grid",0],["fit_leather_chestplate","grid",150],["tinker_upgrade_mining_luck","grid",0],["craft_copper_ingot","grid",0],["craft_copper_spear","grid",150],["craft_golden_axe","grid",750],["salvage_golden_warhammer","grid",0],["craft_shield","grid",500],["salvage_wooden_warhammer","grid",0],["salvage_chainmail_chestplate","grid",0],["craft_elytra","grid",20000],["craft_golden_warhammer","grid",1000],["salvage_golden_rapier","grid",0],["craft_wooden_shovel","grid",50],["craft_diamond_shovel","grid",1200],["salvage_diamond_dagger","grid",0],["fit_diamond_leggings","grid",1200],["craft_copper_hoe","grid",300],["craft_diamond_spear","grid",1200],["craft_copper_mace","grid",450],["salvage_iron_sword","grid",0],["craft_diamond_chestplate","grid",9600],["craft_wooden_axe","grid",150],["craft_diamond_greataxe","grid",4800],["salvage_golden_sword","grid",0],["craft_stone_greataxe","grid",400],["salvage_golden_shovel","grid",0],["salvage_iron_shovel","grid",0],["salvage_copper_helmet","grid",0],["salvage_diamond_boots","grid",0],["craft_wooden_rapier","grid",100],["craft_stone_dagger","grid",100],["craft_copper_leggings","grid",1050],["craft_diamond_mace","grid",3600],["salvage_copper_leggings","grid",0],["salvage_iron_greataxe","grid",0],["tinker_upgrade_woodcutting_drops","grid",0],["salvage_golden_leggings","grid",0],["salvage_copper_boots","grid",0],["fit_golden_boots","grid",250],["salvage_iron_axe","grid",0],["craft_copper_shovel","grid",150],["salvage_iron_warhammer","grid",0],["craft_golden_boots","grid",1000],["fit_leather_helmet","grid",150],["craft_diamond_sword","grid",2400],["fit_chainmail_boots","grid",100],["craft_iron_warhammer","grid",800],["craft_stone_shovel","grid",100],["salvage_diamond_warhammer","grid",0],["tinker_upgrade_enchanting_quality","grid",0],["salvage_golden_mace","grid",0],["craft_diamond_warhammer","grid",4800],["salvage_diamond_chestplate","grid",0],["salvage_golden_pickaxe","grid",0],["salvage_wooden_mace","grid",0],["tinker_upgrade_smithing_quality","grid",0],["tinker_upgrade_damage_radiant","grid",0],["salvage_stone_axe","grid",0],["salvage_stone_pickaxe","grid",0],["craft_iron_boots","grid",800],["craft_golden_sword","grid",500],["craft_leather_chestplate","grid",1200],["salvage_golden_helmet","grid",0],["salvage_golden_hoe","grid",0],["salvage_wooden_sword","grid",0],["craft_copper_warhammer","grid",600],["craft_leather_helmet","grid",750],["fit_copper_helmet","grid",150],["salvage_leather_boots","grid",0],["salvage_golden_chestplate","grid",0],["tinker_upgrade_woodcutting_luck","grid",0],["salvage_golden_dagger","grid",0],["salvage_copper_chestplate","grid",0],["salvage_leather_helmet","grid",0],["salvage_iron_pickaxe","grid",0],["tinker_upgrade_alchemy_quality","grid",0],["craft_chainmail_boots","grid",450],["craft_wooden_hoe","grid",100],["craft_stone_spear","grid",100],["craft_iron_dagger","grid",200],["craft_wooden_dagger","grid",50],["craft_copper_greataxe","grid",600],["tinker_upgrade_dismount_chance","grid",0],["craft_chainmail_leggings","grid",350],["salvage_diamond_pickaxe","grid",0],["craft_wooden_mace","grid",150],["craft_golden_mace","grid",750],["craft_golden_pickaxe","grid",750],["tinker_upgrade_stun_resistance","grid",0],["fit_golden_chestplate","grid",250],["salvage_wooden_greataxe","grid",0],["craft_iron_chestplate","grid",1600],["craft_diamond_axe","grid",3600],["craft_iron_axe","grid",600],["craft_dummy_helmet","grid",0],["craft_golden_greataxe","grid",1000],["craft_golden_shovel","grid",250],["tinker_upgrade_crit_chance","grid",0],["fit_chainmail_leggings","grid",100],["salvage_iron_rapier","grid",0],["craft_diamond_leggings","grid",8400],["fit_copper_chestplate","grid",150],["fit_iron_chestplate","grid",200],["fit_diamond_chestplate","grid",1200],["craft_crossbow","grid",400],["salvage_iron_boots","grid",0],["craft_diamond_dagger","grid",1200],["salvage_iron_hoe","grid",0],["fit_copper_leggings","grid",150],["salvage_stone_rapier","grid",0],["salvage_diamond_mace","grid",0],["salvage_leather_leggings","grid",0],["salvage_diamond_leggings","grid",0],["salvage_wooden_hoe","grid",0],["craft_golden_rapier","grid",500],["craft_iron_greataxe","grid",800],["fit_leather_boots","grid",150],["craft_chainmail_helmet","grid",300],["salvage_chainmail_leggings","grid",0],["craft_stone_mace","grid",300],["fit_golden_leggings","grid",250],["craft_copper_nugget","grid",0],["fit_golden_helmet","grid",250],["salvage_diamond_axe","grid",0],["craft_iron_rapier","grid",400],["craft_stone_axe","grid",300],["craft_diamond_boots","grid",4800],["craft_iron_helmet","grid",1000],["fit_diamond_boots","grid",1200],["fit_iron_boots","grid",200],["salvage_golden_boots","grid",0],["craft_iron_hoe","grid",400],["craft_copper_boots","grid",600],["salvage_iron_mace","grid",0],["craft_golden_spear","grid",250],["craft_copper_dagger","grid",150],["fit_chainmail_chestplate","grid",100],["tinker_upgrade_sprint_movement_speed_bonus","grid",0],["craft_iron_leggings","grid",1400],["salvage_chainmail_helmet","grid",0],["tinker_upgrade_farming_luck","grid",0],["craft_leather_leggings","grid",1050],["salvage_iron_helmet","grid",0],["craft_chainmail_chestplate","grid",450],["craft_stone_sword","grid",200],["craft_diamond_helmet","grid",6000],["craft_stone_warhammer","grid",400],["salvage_stone_warhammer","grid",0],["salvage_golden_axe","grid",0],["craft_leather_boots","grid",600],["salvage_iron_dagger","grid",0],["craft_iron_pickaxe","grid",600],["salvage_wooden_pickaxe","grid",0],["salvage_diamond_greataxe","grid",0],["craft_wooden_pickaxe","grid",150],["craft_iron_mace","grid",600],["craft_copper_helmet","grid",750],["salvage_diamond_spear","grid",0],["craft_iron_spear","grid",200],["craft_copper_rapier","grid",300],["craft_iron_shovel","grid",200],["salvage_stone_sword","grid",0],["craft_stone_pickaxe","grid",300],["salvage_leather_chestplate","grid",0],["salvage_diamond_sword","grid",0],["craft_copper_axe","grid",450],["salvage_stone_greataxe","grid",0],["fit_copper_boots","grid",150],["craft_golden_chestplate","grid",2000],["craft_wooden_spear","grid",50],["salvage_stone_mace","grid",0],["salvage_chainmail_boots","grid",0],["craft_wooden_warhammer","grid",200],["salvage_diamond_rapier","grid",0],["salvage_wooden_axe","grid",0],["craft_diamond_pickaxe","grid",3600],["craft_copper_sword","grid",300],["salvage_stone_hoe","grid",0],["salvage_diamond_shovel","grid",0],["craft_wooden_sword","grid",100],["craft_iron_sword","grid",400],["tinker_upgrade_cooldown_reduction","grid",0],["craft_copper_chestplate","grid",1200],["craft_wooden_greataxe","grid",200],["craft_diamond_hoe","grid",2400],["fit_leather_leggings","grid",150],["fit_iron_helmet","grid",200],["craft_golden_helmet","grid",1250],["fit_diamond_helmet","grid",1200],["salvage_wooden_rapier","grid",0],["craft_diamond_rapier","grid",2400],["salvage_iron_chestplate","grid",0],["salvage_golden_greataxe","grid",0],["craft_golden_hoe","grid",500],["fit_iron_leggings","grid",200],["craft_golden_dagger","grid",250],["tinker_upgrade_healing_bonus","grid",0],["craft_stone_hoe","grid",200],["craft_copper_pickaxe","grid",450],["tinker_upgrade_skill_exp_gain","grid",0],["sharpen_golden_greataxe","immersive",250],["sharpen_golden_rapier","immersive",250],["sharpen_copper_spear","immersive",150],["sharpen_iron_rapier","immersive",200],["sharpen_diamond_greataxe","immersive",1200],["sharpen_diamond_sword","immersive",1200],["sharpen_iron_spear","immersive",200],["sharpen_copper_pickaxe","immersive",150],["sharpen_copper_rapier","immersive",150],["sharpen_iron_dagger","immersive",200],["sharpen_copper_greataxe","immersive",150],["sharpen_golden_sword","immersive",250],["sharpen_golden_shovel","immersive",250],["sharpen_copper_sword","immersive",150],["sharpen_copper_axe","immersive",150],["sharpen_diamond_shovel","immersive",1200],["sharpen_golden_dagger","immersive",250],["sharpen_iron_greataxe","immersive",200],["sharpen_diamond_axe","immersive",1200],["sharpen_golden_spear","immersive",250],["sharpen_golden_pickaxe","immersive",250],["sharpen_golden_axe","immersive",250],["sharpen_diamond_pickaxe","immersive",1200],["sharpen_diamond_spear","immersive",1200],["sharpen_copper_shovel","immersive",150],["sharpen_iron_shovel","immersive",200],["sharpen_diamond_rapier","immersive",1200],["sharpen_iron_sword","immersive",200],["sharpen_copper_dagger","immersive",150],["sharpen_iron_pickaxe","immersive",200],["sharpen_iron_axe","immersive",200],["sharpen_diamond_dagger","immersive",1200],["upgrade_diamond_pickaxe","smith",0],["upgrade_diamond_sword","smith",0],["upgrade_diamond_spear","smith",0],["upgrade_diamond_chestplate","smith",0],["upgrade_diamond_boots","smith",0],["upgrade_diamond_rapier","smith",0],["upgrade_diamond_helmet","smith",0],["upgrade_diamond_hoe","smith",0],["upgrade_diamond_greataxe","smith",0],["upgrade_elytra","smith",0],["upgrade_diamond_shovel","smith",0],["upgrade_diamond_warhammer","smith",0],["upgrade_diamond_leggings","smith",0],["upgrade_diamond_dagger","smith",0],["upgrade_diamond_mace","smith",0],["upgrade_diamond_axe","smith",0],["upgrade_diamond_knuckles","smith",0]];
+
+const fmt = n => n.toLocaleString('en-US');
+
+/* ---------- Navigation ---------- */
+const main = document.getElementById('main');
+const navBtns = [...document.querySelectorAll('.nav button')];
+const menuBtn = document.getElementById('menuBtn');
+const nav = document.getElementById('nav');
+menuBtn.onclick = () => nav.classList.toggle('open');
+
+function go(page){
+  navBtns.forEach(b => b.classList.toggle('active', b.dataset.page === page));
+  nav.classList.remove('open');
+  render(page);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+navBtns.forEach(b => b.onclick = () => go(b.dataset.page));
+
+/* ---------- Renderers ---------- */
+function render(page){
+  if(page==='home') return home();
+  if(page==='skills') return skills();
+  if(page==='leveling') return leveling();
+  if(page==='smithing') return smithing();
+  if(page==='tinker') return tinker();
+  if(page==='recipes') return recipes();
+}
+
+function home(){
+  const catCount = {};
+  DATA.skills.forEach(s => catCount[s.cat] = (catCount[s.cat]||0)+1);
+  main.innerHTML = `
+  <section class="page active">
+    <div class="hero">
+      <div class="kicker">Player Codex</div>
+      <h2>Master the realm of ValhallaMMO</h2>
+      <p>This plugin turns vanilla Minecraft into a deep RPG. Every action you take — mining, fighting, farming, crafting — trains a skill, unlocks perks, and makes your gear stronger. This guide explains how all of it fits together.</p>
+      <div class="stats-row">
+        <div class="stat-b"><div class="n">14</div><div class="l">Skills</div></div>
+        <div class="stat-b"><div class="n">100</div><div class="l">Max Level</div></div>
+        <div class="stat-b"><div class="n">49</div><div class="l">Tinker Upgrades</div></div>
+        <div class="stat-b"><div class="n">555</div><div class="l">Recipes</div></div>
+      </div>
+    </div>
+
+    <h3>The core idea in three sentences</h3>
+    <div class="grid g3">
+      <div class="card"><span class="ico">🎯</span><div class="title">Play to level</div><p>You don't grind menus — you earn skill XP simply by doing the activity. Mine ore to level Mining, swing a sword to level Light Weapons.</p></div>
+      <div class="card"><span class="ico">✦</span><div class="title">Levels feed Power</div><p>Every skill you raise also raises your <strong>Power</strong> level, which grants skill points you spend in skill trees to unlock perks.</p></div>
+      <div class="card"><span class="ico">🔨</span><div class="title">Skills shape gear</div><p>Your Smithing level decides how strong the gear you craft is. Higher level = higher quality = better stats from the same recipe.</p></div>
+    </div>
+
+    <h3>What's in the Classic pack</h3>
+    <p>Your server runs the <strong>Classic import</strong>, a full crafting overhaul layered on top of the skills system. It adds a custom <strong>copper tier</strong>, new weapon types (daggers, rapiers, spears, greataxes, warhammers), and a multi-step smithing workflow where you craft, heat, quench, fit and sharpen gear.</p>
+    <div class="grid g4" style="margin-top:18px">
+      <div class="card"><span class="ico">⚔</span><div class="title">9 weapons</div><p>Sword, dagger, rapier, spear, greataxe, mace, warhammer, trident, bow.</p></div>
+      <div class="card"><span class="ico">🛡</span><div class="title">6 armor tiers</div><p>Leather, chainmail, copper, iron, gold, diamond — all upgradable.</p></div>
+      <div class="card"><span class="ico">⚒</span><div class="title">4 craft systems</div><p>Grid table, cauldron quench, furnace heat, grindstone sharpen.</p></div>
+      <div class="card"><span class="ico">🔧</span><div class="title">49 upgrades</div><p>Tinker your gear with damage, defense, mobility and utility mods.</p></div>
+    </div>
+
+    <h3>Where to start</h3>
+    <div class="grid g2">
+      <div class="card" style="cursor:pointer" onclick="go('skills')"><h4>New player?</h4><div class="title">Read the Skills page →</div><p>Understand what each of the 14 skills does and how to train it. This is the heart of the plugin.</p></div>
+      <div class="card" style="cursor:pointer" onclick="go('smithing')"><h4>Want better gear?</h4><div class="title">Learn the Smithing flow →</div><p>The craft → heat → quench → fit → sharpen pipeline is the most-misunderstood system. We break it down step by step.</p></div>
+    </div>
+  </section>`;
+}
+
+function skills(){
+  const cats = ['Gathering','Combat','Defense','Crafting','Meta'];
+  let html = `<section class="page active">
+    <div class="kicker">The 14 Skills</div>
+    <h2>Skills &amp; how to train them</h2>
+    <p class="lede">Every skill levels by doing its activity — no menus, no grind targets. Click any skill to see its best XP sources.</p>`;
+  cats.forEach(cat => {
+    const list = DATA.skills.filter(s => s.cat === cat);
+    if(!list.length) return;
+    html += `<h3>${cat}</h3><div class="grid g3" style="margin-bottom:8px">`;
+    list.forEach(s => {
+      html += `<div class="skill-card" onclick="skillDetail('${s.id}')">
+        <div class="sc-head">
+          <div class="sc-icon" style="color:${s.color};background:${s.color}1a">${s.icon}</div>
+          <div><div class="sc-name">${s.name}</div><div class="sc-cat">${s.cat}</div></div>
+        </div>
+        <div class="sc-body"><p>${s.desc}</p></div>
+        <div class="sc-more">View XP sources →</div>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+  html += `</section>`;
+  main.innerHTML = html;
+}
+
+function skillDetail(id){
+  const s = DATA.skills.find(x => x.id === id);
+  let rows = '';
+  s.top.forEach(t => {
+    if(t.length === 1){ rows += `<tr><td colspan="2" style="font-style:italic">${t[0]}</td></tr>`; }
+    else { rows += `<tr><td>${t[0]}</td><td class="xp">${typeof t[1]==='number'?fmt(t[1])+' XP':t[1]}</td></tr>`; }
+  });
+  main.innerHTML = `<section class="page active">
+    <button class="chip" onclick="go('skills')" style="margin-bottom:24px">← All skills</button>
+    <div class="hero" style="margin-bottom:30px">
+      <div style="display:flex;align-items:center;gap:18px">
+        <div class="sc-icon" style="width:64px;height:64px;font-size:34px;color:${s.color};background:${s.color}1a;border-color:${s.color}55">${s.icon}</div>
+        <div><div class="kicker" style="margin-bottom:4px">${s.cat} skill</div><h2 style="margin:0;font-size:32px">${s.name}</h2></div>
+      </div>
+      <p style="margin-top:20px">${s.desc}</p>
+    </div>
+    <div class="grid g2">
+      <div class="card"><h4>How you train it</h4><p>${s.how}</p></div>
+      <div class="card"><h4>Special ability</h4><p>${s.ability}</p></div>
+    </div>
+    <h3>Top XP sources</h3>
+    <div class="tbl-wrap"><table><thead><tr><th>Action / drop</th><th>XP earned</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <div class="callout"><div class="ct">Tip</div><p>Only naturally-generated blocks and legitimate kills grant XP. Placing then re-breaking a block gives nothing, and farming XP in one chunk too fast triggers a diminishing-returns nerf.</p></div>
+  </section>`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+window.skillDetail = skillDetail;
+window.go = go;
+
+function leveling(){
+  let rows = '';
+  DATA.curve.milestones.forEach(m => {
+    rows += `<tr><td class="lvl">${m[0]}</td><td class="xp">${fmt(m[1])}</td><td class="xp" style="color:var(--ink-dim)">${fmt(m[2])}</td></tr>`;
+  });
+  main.innerHTML = `<section class="page active">
+    <div class="kicker">Experience &amp; Progression</div>
+    <h2>How leveling works</h2>
+    <p class="lede">Skills get exponentially harder to level. Early levels fly by; the last stretch to 100 is a real commitment.</p>
+
+    <div class="grid g3">
+      <div class="card"><span class="ico">📈</span><div class="title">Per-skill XP</div><p>Each of the 14 skills tracks its own XP and level, capped at <strong>100</strong>. You raise it by performing that skill's activity.</p></div>
+      <div class="card"><span class="ico">✦</span><div class="title">Power level</div><p>All skill XP also pours into <strong>Power</strong> (max 256). Power grants the skill points you spend on perks.</p></div>
+      <div class="card"><span class="ico">🌳</span><div class="title">Perks &amp; trees</div><p>Open a skill tree with <code>/skills</code>, then spend points to unlock perks. Many perks have level requirements.</p></div>
+    </div>
+
+    <h3>The XP curve (per skill)</h3>
+    <p>XP needed for the next level follows this formula, where <code>level</code> is the level you're climbing toward:</p>
+    <div class="callout"><p style="font-family:var(--mono);color:var(--gold);font-size:15px">${DATA.curve.formula}</p></div>
+
+    <div class="calc">
+      <label>Target level: <span id="lvlOut" style="color:var(--gold);font-family:var(--mono)">50</span></label>
+      <input type="range" id="lvlSlider" min="1" max="100" value="50">
+      <div class="calc-out"><span class="big" id="cumOut">97,670</span><span class="unit">total XP to reach this level</span></div>
+      <div class="calc-grid">
+        <div class="calc-mini"><div class="n" id="thisLvl">7,520</div><div class="l">XP for this level alone</div></div>
+        <div class="calc-mini"><div class="n" id="oreEq">~244</div><div class="l">≈ diamond ore (400 XP ea.)</div></div>
+        <div class="calc-mini"><div class="n" id="pctMax">9.8%</div><div class="l">of the way to level 100</div></div>
+      </div>
+    </div>
+
+    <h3>Milestone reference</h3>
+    <div class="tbl-wrap"><table><thead><tr><th>Level</th><th>Total XP</th><th>This level costs</th></tr></thead><tbody>${rows}</tbody></table></div>
+
+    <div class="grid g2" style="margin-top:30px">
+      <div class="card"><h4>Diminishing returns</h4><p>Earning lots of XP in a single chunk too quickly triggers a nerf — XP drops to ~10% in that chunk. Move around as you grind to avoid it.</p></div>
+      <div class="card"><h4>Overleveled gear penalty</h4><p>Using gear far above your skill level cripples it: up to −70% damage, −70% armor, and 10× durability loss. Match your gear tier to your level.</p></div>
+    </div>
+  </section>`;
+
+  const slider = document.getElementById('lvlSlider');
+  const F = lvl => (lvl + 75 * Math.pow(2, lvl/7.6)) + 300;
+  function update(){
+    const lvl = +slider.value;
+    let cum = 0; for(let i=1;i<=lvl;i++) cum += F(i);
+    const thisL = F(lvl);
+    document.getElementById('lvlOut').textContent = lvl;
+    document.getElementById('cumOut').textContent = fmt(Math.round(cum));
+    document.getElementById('thisLvl').textContent = fmt(Math.round(thisL));
+    document.getElementById('oreEq').textContent = '~' + fmt(Math.round(cum/400));
+    document.getElementById('pctMax').textContent = (cum/7897845*100).toFixed(1) + '%';
+  }
+  slider.oninput = update; update();
+}
+
+function smithing(){
+  let steps = '';
+  DATA.smithSteps.forEach((s,i) => {
+    steps += `<div class="step"><div class="step-num">${i+1}</div><div class="step-body"><div class="st">${s.t}</div><p>${s.d}</p><span class="tag">${s.tag}</span></div></div>`;
+  });
+  main.innerHTML = `<section class="page active">
+    <div class="kicker">The Crafting Pipeline</div>
+    <h2>Smithing &amp; gear quality</h2>
+    <p class="lede">The Classic pack replaces vanilla crafting with a multi-step forge. Here's the full lifecycle of a weapon, from raw ingot to fully tinkered netherite.</p>
+
+    <div class="callout"><div class="ct">The golden rule</div><p>Your <strong>Smithing level</strong> at the moment you craft sets the item's quality — and quality scales every stat. Level Smithing before forging your endgame gear.</p></div>
+
+    <div class="flow">${steps}</div>
+
+    <h3>The quality system</h3>
+    <div class="grid g2">
+      <div class="card"><h4>Quality scaling</h4><p>Each item gets a quality value at craft time, tied to your Smithing level. A higher-quality sword has more damage and durability than a low-quality one — same recipe, different smith.</p></div>
+      <div class="card"><h4>Copper tier</h4><p>A custom material between stone and iron, with its own ingots, nuggets, armor (with custom color) and full weapon set. A great mid-game step.</p></div>
+    </div>
+
+    <h3>Custom items in the pack</h3>
+    <div class="grid g2">
+      <div class="card"><div class="title">Hot iron / gold / netherite</div><p>Created by smelting a raw ingot in a furnace. These are <strong>not</strong> used in quenching — do not drop these in a cauldron. They exist as custom items in the pack but are not consumed by any Classic recipe.</p></div>
+      <div class="card"><div class="title">Unstable diamond</div><p>Made via the <code>destabilize_diamond</code> grid recipe. Required to upgrade diamond gear to netherite at the smithing table.</p></div>
+    </div>
+    <div class="callout warn"><div class="ct">Common mistake</div><p>To quench, you heat <strong>the weapon or armor itself</strong> in a furnace, then drop <strong>that heated item</strong> into a water cauldron. Do not smelt ingots and drop the hot ingots — that does nothing (you'll just hear a fizzle).</p></div>
+  </section>`;
+}
+
+function tinker(){
+  let html = `<section class="page active">
+    <div class="kicker">Item Modification</div>
+    <h2>Tinker upgrades</h2>
+    <p class="lede">49 upgrades you apply at the crafting table to customize gear. The item must have been Valhalla-crafted, and most upgrades stack up to 4 times.</p>
+    <div class="callout"><div class="ct">How to apply</div><p>Place your gear in the crafting grid with the upgrade's ingredients. Each upgrade consumes one of the item's upgrade slots — raise the cap with the <strong>Bonus slot 1/2/3</strong> upgrades.</p></div>`;
+  Object.entries(DATA.tinker).forEach(([cat,list]) => {
+    html += `<h3>${cat}</h3><div class="grid g3">`;
+    list.forEach(u => {
+      html += `<div class="card" style="padding:16px 18px"><div class="title" style="font-size:15px;margin-bottom:6px">${u[0]}</div><p style="font-size:13.5px">${u[1]}</p></div>`;
+    });
+    html += `</div>`;
+  });
+  html += `</section>`;
+  main.innerHTML = html;
+}
+
+function recipes(){
+  main.innerHTML = `<section class="page active">
+    <div class="kicker">Recipe Browser</div>
+    <h2>All recipes</h2>
+    <p class="lede">Every craft, quench, sharpen and upgrade recipe in the Classic pack — 356 player-facing recipes. (A further 199 internal &ldquo;heat&rdquo; steps power the furnace stage and aren&rsquo;t shown here.)</p>
+    <div class="search-bar"><span class="si">⌕</span><input id="rsearch" placeholder="Search recipes — try 'diamond', 'quench', 'copper'…"></div>
+    <div class="filters" id="rfilters">
+      <span class="chip active" data-f="all">All</span>
+      <span class="chip" data-f="grid">Grid table</span>
+      <span class="chip" data-f="cauldron">Cauldron</span>
+      <span class="chip" data-f="immersive">Grindstone</span>
+      <span class="chip" data-f="smith">Smithing table</span>
+    </div>
+    <div class="tbl-wrap"><table><thead><tr><th>Recipe</th><th>Station</th><th>Smithing XP</th></tr></thead><tbody id="rbody"></tbody></table></div>
+  </section>`;
+
+  const badge = {grid:['Grid table','b-grid'],cauldron:['Cauldron','b-cauldron'],immersive:['Grindstone','b-immersive'],smith:['Smithing table','b-smith']};
+  let filter = 'all', query = '';
+  function pretty(n){ return n.replace(/_/g,' ').replace(/\b\w/g, c=>c.toUpperCase()); }
+  function draw(){
+    const rows = RECIPES.filter(r => (filter==='all'||r[1]===filter) && r[0].includes(query));
+    const body = document.getElementById('rbody');
+    body.innerHTML = rows.slice(0,250).map(r => {
+      const b = badge[r[1]];
+      return `<tr><td>${pretty(r[0])}</td><td><span class="badge ${b[1]}">${b[0]}</span></td><td class="xp">${r[2]?fmt(r[2]):'—'}</td></tr>`;
+    }).join('') || `<tr><td colspan="3" style="color:var(--ink-faint)">No recipes match.</td></tr>`;
+    if(rows.length>250) body.innerHTML += `<tr><td colspan="3" style="color:var(--ink-faint);font-style:italic">…and ${rows.length-250} more — refine your search.</td></tr>`;
+  }
+  document.getElementById('rsearch').oninput = e => { query = e.target.value.toLowerCase(); draw(); };
+  document.querySelectorAll('#rfilters .chip').forEach(c => c.onclick = () => {
+    document.querySelectorAll('#rfilters .chip').forEach(x=>x.classList.remove('active'));
+    c.classList.add('active'); filter = c.dataset.f; draw();
+  });
+  draw();
+}
+
+home();
+</script>
+</body>
+</html>
